@@ -1,3 +1,5 @@
+// REPLACE a/bug-tracker/server.js WITH THIS:
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -7,6 +9,7 @@ const session = require('express-session');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json()); // <-- ADDED FOR API
 app.use(session({
  secret: 'your_secret_key',
  resave: false,
@@ -26,11 +29,13 @@ const checkAuth = (req, res, next) => {
 };
 
 // Routes
-const authRoutes = require('./routes/auth.js');
-const bugRoutes = require('./routes/bugs.js');
+const authRoutes = require('./routes/auth');
+const bugRoutes = require('./routes/bugs');
+const apiRoutes = require('./routes/api'); // <-- ADDED FOR API
 
 app.use(authRoutes);
 app.use(bugRoutes);
+app.use('/api', apiRoutes); // <-- ADDED FOR API
 
 
 app.get('/', (req, res) => {

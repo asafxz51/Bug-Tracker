@@ -1,325 +1,423 @@
+/* REPLACE a/bug-tracker/public/css/style.css WITH THIS: */
+
+/* General Styles */
 body {
- font-family: Arial, sans-serif;
- margin: 0;
- background-color: #f4f4f4;
- color: #333;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
 .container {
- max-width: 1200px;
- margin: 20px auto;
- padding: 20px;
- background: #fff;
- border-radius: 8px;
- box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav {
- background: #333;
- color: #fff;
- padding: 10px 20px;
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
 }
 
 .nav-container {
- max-width: 1200px;
- margin: 0 auto;
- display: flex;
- justify-content: space-between;
- align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-brand {
- color: #fff;
- text-decoration: none;
- font-size: 1.5em;
- font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 nav ul {
- list-style: none;
- margin: 0;
- padding: 0;
- display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 nav ul li {
- margin-left: 20px;
+  margin-left: 20px;
 }
 
 nav ul li a {
- color: #fff;
- text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
+.nav-user-link a {
+  font-weight: bold;
+  color: #a2d2ff !important;
+}
+
+.nav-user-link a:hover {
+  color: #ffffff !important;
+}
+
+/* Forms & Buttons */
 .form-container {
- max-width: 400px;
- margin: 40px auto;
- padding: 20px;
- background: #fff;
- border-radius: 8px;
- box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
- margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .form-group label {
- display: block;
- margin-bottom: 5px;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
- width: 100%;
- padding: 8px;
- border: 1px solid #ddd;
- border-radius: 4px;
- box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
 .btn {
- display: inline-block;
- padding: 10px 15px;
- background: #333;
- color: #fff;
- border: none;
- border-radius: 4px;
- cursor: pointer;
- text-decoration: none;
+  display: inline-block;
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
 }
 
 .btn-danger {
- background: #dc3545;
+  background: #dc3545;
 }
 
+.btn-secondary {
+  background: #6c757d;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ***FIXED***: New small button variant */
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* Dashboard & Tables */
 .filters {
- margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .filters form {
- display: flex;
- justify-content: space-between;
- gap: 10px;
- align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.filters form select, input {
-  font-size: 1em;
-  padding: 0.2cm 0.3cm;
+.filters form select,
+.filters form input[type="text"],
+.filters form .btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 38px;
+  box-sizing: border-box;
 }
 
-
+.filters form input[type="text"] {
+  flex-grow: 1;
+}
 
 .bug-table {
- width: 100%;
- border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .bug-table th,
 .bug-table td {
- padding: 12px;
- border: 1px solid #ddd;
- text-align: left;
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
 }
 
 .bug-table thead {
- background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .bug-table tbody tr:hover {
- background-color: #f5f5f5;
- cursor: pointer;
+  background-color: #f5f5f5;
+  cursor: pointer;
 }
 
-.update-status select{
- font-size: 1.2em;
+.my-work-section {
+  margin-top: 40px;
 }
 
-.update-status-form {
- text-align: center;
- margin-top: 0.5cm;
- display: flex;
- gap: 10px;
- flex-direction: column;
- max-width: 130px;
+.my-work-section h2 {
+  border-bottom: 2px solid #e1e4e8;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.site-footer {
- text-align: center;
- margin-top: 40px;
- padding: 20px;
- border-top: 1px solid var(--border-color);
- color: var(--secondary-color);
- font-size: 0.9em;
-}
-
-/* ADD THESE NEW STYLES TO THE END OF public/css/style.css */
-
-/* --- Button Styles --- */
-.btn-secondary {
- background: #6c757d;
-}
-
-/* --- Card Layout --- */
+/* Bug Detail Card */
 .card {
- background: #ffffff;
- border: 1px solid #e1e4e8;
- border-radius: 8px;
- margin-top: 20px;
- box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
- overflow: hidden;
- /* Ensures child borders don't spill out */
+  background: #ffffff;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
 .card-header {
- padding: 16px 24px;
- background-color: #f6f8fa;
- border-bottom: 1px solid #e1e4e8;
- display: flex;
- justify-content: space-between;
- align-items: center;
+  padding: 16px 24px;
+  background-color: #f6f8fa;
+  border-bottom: 1px solid #e1e4e8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-header h2 {
- margin: 0;
- font-size: 24px;
+  margin: 0;
+  font-size: 24px;
 }
 
 .card-body {
- padding: 24px;
+  padding: 24px;
 }
 
 .card-footer {
- padding: 16px 24px;
- background-color: #f6f8fa;
- border-top: 1px solid #e1e4e8;
- display: flex;
- gap: 10px;
- flex-wrap: wrap;
- flex-direction: column;
+  padding: 16px 24px;
+  background-color: #f6f8fa;
+  border-top: 1px solid #e1e4e8;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-
-
-/* --- Status & Priority Badges --- */
 .status-badge {
- padding: 5px 12px;
- border-radius: 20px;
- font-weight: bold;
- font-size: 14px;
- color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+}
+
+.bug-table .status-badge {
+  font-size: 12px;
+  padding: 3px 10px;
 }
 
 .status-open {
- background-color: #28a745;
+  background-color: #28a745;
 }
 
 .status-in-progress {
- background-color: #007bff;
+  background-color: #007bff;
 }
 
 .status-resolved {
- background-color: #6f42c1;
+  background-color: #6f42c1;
 }
 
 .status-closed {
- background-color: #6c757d;
+  background-color: #6c757d;
 }
 
 .severity-critical,
 .priority-high {
- color: #dc3545;
- font-weight: bold;
+  color: #dc3545;
+  font-weight: bold;
 }
 
 .severity-major,
 .priority-medium {
- color: #fd7e14;
- font-weight: bold;
+  color: #fd7e14;
+  font-weight: bold;
 }
 
-
-/* --- Bug Details List --- */
 .bug-details-list {
- margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .detail-item {
- display: flex;
- padding: 12px 0;
- border-bottom: 1px solid #f0f0f0;
- font-size: 16px;
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 16px;
 }
 
 .detail-item:last-child {
- border-bottom: none;
+  border-bottom: none;
 }
 
 .detail-label {
- font-weight: bold;
- color: #586069;
- width: 150px;
- flex-shrink: 0;
+  font-weight: bold;
+  color: #586069;
+  width: 150px;
+  flex-shrink: 0;
 }
 
 .detail-value {
- color: #24292e;
+  color: #24292e;
 }
 
-
+/* Description Section */
 .bug-description-section h3 {
- border-bottom: 2px solid #e1e4e8;
- padding-bottom: 8px;
- margin-top: 20px;
- margin-bottom: 16px;
+  border-bottom: 2px solid #e1e4e8;
+  padding-bottom: 8px;
+  margin-top: 20px;
+  margin-bottom: 16px;
 }
 
 .description-content p {
- background-color: #f9f9f9;
- border-left: 4px solid #007bff;
- padding: 15px;
- line-height: 1.6;
- white-space: pre-wrap;
- margin: 0;
+  background-color: #f9f9f9;
+  border-left: 4px solid #007bff;
+  padding: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin: 0;
 }
 
-.my-work-section {
- margin-top: 40px;
+/* Steps Section */
+.steps-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.my-work-section h2 {
- border-bottom: 2px solid #e1e4e8;
- padding-bottom: 10px;
- margin-bottom: 20px;
+.steps-section h3,
+.form-group>label {
+  border-bottom: 2px solid #e1e4e8;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
 }
 
-/* --- Navbar User Link --- */
-.nav-user-link a {
- font-weight: bold;
- color: #a2d2ff !important;
- /* Use !important to override the default nav link color */
+.steps-section ol {
+  list-style-type: none;
+  counter-reset: steps-counter;
+  padding-left: 0;
+  margin: 0;
 }
 
-.nav-user-link a:hover {
- color: #ffffff !important;
+.steps-section li {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  counter-increment: steps-counter;
 }
 
-.bug-table .status-badge {
- padding: 3px 10px;
- font-size: 12px;
- border-radius: 12px;
- display: inline-block;
+.steps-section li::before {
+  content: counter(steps-counter) ".";
+  font-weight: bold;
+  color: #586069;
+  min-width: 20px;
+  text-align: right;
 }
 
+.steps-section li:last-child {
+  border-bottom: none;
+}
 
-.error-message {
- background-color: #f8d7da;
- color: #721c24;
- border: 1px solid #f5c6cb;
- padding: 10px 15px;
- border-radius: 4px;
- margin-bottom: 20px;
- text-align: center;
+.steps-section li.no-steps {
+  list-style-type: none;
+  color: #586069;
+  padding-left: 0;
+}
+
+.steps-section li.no-steps::before {
+  content: "";
+}
+
+.step-description {
+  flex-grow: 1;
+  cursor: grab;
+}
+
+.step-actions {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+/* ***FIXED***: Removed the old, specific button style that was causing the issue */
+.edit-step-input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+}
+
+.add-step-form {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.add-step-form button{
+  width: 100px;
+/* padding: 5px; */
+}
+
+.add-step-form input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-status-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.update-status-form select,
+.update-status-form .btn {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  color: #6c757d;
+  border-top: 1px solid #e1e4e8;
 }

@@ -1,32 +1,33 @@
+<!-- REPLACE a/bug-tracker/views/partials/header.ejs WITH THIS: -->
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Bug Tracker</title>
- <link rel="stylesheet" href="/css/style.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Bug Tracker</title>
+   <link rel="stylesheet" href="/css/style.css">
+   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </head>
 
 <body>
- <nav>
-  <div class="nav-container">
-   <a href="/dashboard" class="nav-brand">BugTracker</a>
-<!-- OLD CODE IN header.ejs -->
-<!-- NEW CODE FOR header.ejs -->
-<ul>
-   <% if (typeof currentUserId !=='undefined' && currentUserId) { %>
-      <li><a href="/dashboard">Dashboard</a></li>
-      <li><a href="/bugs/new">Report Bug</a></li>
-      <li class="nav-user-link"><a href="/my-work">
-            <%= username %>'s Work
-         </a></li>
-      <li><a href="/logout">Logout</a></li>
-      <% } else { %>
-         <li><a href="/login">Login</a></li>
-         <li><a href="/register">Register</a></li>
-         <% } %>
-</ul>
-  </div>
- </nav>
- <div class="container">
+   <nav>
+      <div class="nav-container">
+         <a href="/dashboard" class="nav-brand">BugTracker</a>
+         <ul>
+            <% if (typeof currentUserId !=='undefined' && currentUserId) { %>
+               <li><a href="/dashboard">Dashboard</a></li>
+               <li><a href="/bugs/new">Report Bug</a></li>
+               <li class="nav-user-link"><a href="/my-work">
+                     <%= username %>'s Work
+                  </a></li>
+               <li><a href="/logout">Logout</a></li>
+               <% } else { %>
+                  <li><a href="/login">Login</a></li>
+                  <li><a href="/register">Register</a></li>
+                  <% } %>
+         </ul>
+      </div>
+   </nav>
+   <div class="container">

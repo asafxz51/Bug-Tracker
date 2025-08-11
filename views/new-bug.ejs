@@ -1,46 +1,65 @@
+<!-- REPLACE a/bug-tracker/views/new-bug.ejs WITH THIS: -->
+
 <%- include('partials/header') %>
 
- <h2>Report a New Bug</h2>
+  <h2>Report a New Bug</h2>
 
- <form action="/bugs" method="POST">
-  <div class="form-group">
-   <label for="bugName">Bug Name</label>
-   <input type="text" id="bugName" name="bugName" required>
-  </div>
-  <div class="form-group">
-   <label for="description">Description</label>
-   <textarea id="description" name="description" rows="5" required></textarea>
-  </div>
-  <div class="form-group">
-   <label for="assignedTo">Assigned To</label>
-   <select id="assignedTo" name="assignedTo" required>
-    <option value="">Select User</option>
-    <% users.forEach(user=> { %>
-     <option value="<%= user.id %>">
-      <%= user.username %>
-     </option>
-     <% }) %>
-   </select>
-  </div>
-  <div class="form-group">
-   <label for="severity">Severity</label>
-   <select id="severity" name="severity" required>
-    <option value="Trivial">Trivial</option>
-    <option value="Minor">Minor</option>
-    <option value="Medium">Medium</option>
-    <option value="Major">Major</option>
-    <option value="Critical">Critical</option>
-   </select>
-  </div>
-  <div class="form-group">
-   <label for="priority">Priority</label>
-   <select id="priority" name="priority" required>
-    <option value="Low">Low</option>
-    <option value="Medium">Medium</option>
-    <option value="High">High</option>
-   </select>
-  </div>
-  <button type="submit" class="btn">Submit Bug</button>
- </form>
+  <form action="/bugs" method="POST" id="new-bug-form">
+    <div class="form-group">
+      <label for="bugName">Bug Name</label>
+      <input type="text" id="bugName" name="bugName" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="5" required></textarea>
+    </div>
 
- <%- include('partials/footer') %>
+    <!-- ***NEW***: Steps section for creating a bug -->
+    <div class="form-group">
+      <label>Steps to Reproduce</label>
+      <div class="steps-section" id="new-bug-steps-section">
+        <ol id="new-steps-list">
+          <!-- Steps will be dynamically inserted here by JavaScript -->
+        </ol>
+        <div class="add-step-form">
+          <input type="text" id="new-step-description" placeholder="Enter a new step">
+          <button type="button" id="add-step-btn" class="btn">Add Step</button>
+        </div>
+        <!-- This hidden input will hold the steps data for submission -->
+        <input type="hidden" name="steps" id="steps-data-input">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="assignedTo">Assigned To</label>
+      <select id="assignedTo" name="assignedTo" required>
+        <option value="">Select User</option>
+        <% users.forEach(user=> { %>
+          <option value="<%= user.id %>">
+            <%= user.username %>
+          </option>
+          <% }) %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="severity">Severity</label>
+      <select id="severity" name="severity" required>
+        <option value="Trivial">Trivial</option>
+        <option value="Minor">Minor</option>
+        <option value="Medium">Medium</option>
+        <option value="Major">Major</option>
+        <option value="Critical">Critical</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <select id="priority" name="priority" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </div>
+    <button type="submit" class="btn">Submit Bug</button>
+  </form>
+
+  <%- include('partials/footer') %>

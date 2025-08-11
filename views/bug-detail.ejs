@@ -1,3 +1,5 @@
+<!-- REPLACE a/bug-tracker/views/bug-detail.ejs WITH THIS: -->
+
 <%- include('partials/header') %>
 
   <% if (bug) { %>
@@ -12,42 +14,45 @@
       </div>
       <div class="card-body">
         <div class="bug-details-list">
-          <div class="detail-item">
-            <span class="detail-label">Bug ID</span>
-            <span class="detail-value">
+          <div class="detail-item"><span class="detail-label">Bug ID</span><span class="detail-value">
               <%= bug.id %>
-            </span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Severity</span>
-            <span class="detail-value severity-<%= bug.severity.toLowerCase() %>">
+            </span></div>
+          <div class="detail-item"><span class="detail-label">Severity</span><span
+              class="detail-value severity-<%= bug.severity.toLowerCase() %>">
               <%= bug.severity %>
-            </span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Priority</span>
-            <span class="detail-value priority-<%= bug.priority.toLowerCase() %>">
+            </span></div>
+          <div class="detail-item"><span class="detail-label">Priority</span><span
+              class="detail-value priority-<%= bug.priority.toLowerCase() %>">
               <%= bug.priority %>
-            </span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Created By</span>
-            <span class="detail-value">
+            </span></div>
+          <div class="detail-item"><span class="detail-label">Created By</span><span class="detail-value">
               <%= bug.createdBy %>
-            </span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Assigned To</span>
-            <span class="detail-value">
+            </span></div>
+          <div class="detail-item"><span class="detail-label">Assigned To</span><span class="detail-value">
               <%= bug.assignedTo %>
-            </span>
-          </div>
-          <div class="detail-item">
-            <span class="detail-label">Creation Date</span>
-            <span class="detail-value">
+            </span></div>
+          <div class="detail-item"><span class="detail-label">Creation Date</span><span class="detail-value">
               <%= new Date(bug.creationDate).toLocaleString() %>
-            </span>
-          </div>
+            </span></div>
+          <% if (bug.closingDate) { %>
+            <div class="detail-item">
+              <span class="detail-label">Closing Date</span>
+              <span class="detail-value">
+                <%= new Date(bug.closingDate).toLocaleString() %>
+              </span>
+            </div>
+            <% } %>
+        </div>
+
+        <div class="steps-section">
+          <h3>Steps to Reproduce</h3>
+          <ol id="steps-list" data-bug-id="<%= bug.id %>"></ol>
+          <% if (currentUserId===bug.createdById) { %>
+            <div class="add-step-form">
+              <input type="text" id="new-step-description" placeholder="Enter a new step to reproduce">
+              <button id="add-step-btn" class="btn">Add Step</button>
+            </div>
+            <% } %>
         </div>
 
         <div class="bug-description-section">
@@ -58,7 +63,6 @@
         </div>
       </div>
       <div class="card-footer">
-        <div class="action-buttons">
         <% if (currentUserId===bug.createdById) { %>
           <a href="/bugs/<%= bug.id %>/edit" class="btn btn-secondary">Edit Bug</a>
           <form action="/bugs/<%= bug.id %>/delete" method="POST" style="display:inline;"
@@ -66,11 +70,10 @@
             <button type="submit" class="btn btn-danger">Delete Bug</button>
           </form>
           <% } %>
-          </div>
-<div class="update-status">
-            <% if (currentUserId===bug.assignedToId) { %>
+            <% if (currentUserId===bug.assignedToId || currentUserId===bug.createdById) { %>
               <form action="/bugs/<%= bug.id %>/status" method="POST" class="update-status-form">
                 <span>Update Status:</span>
+                <!-- ***FIXED***: Added logic to dynamically select the current status -->
                 <select name="status">
                   <option value="Open" <%=bug.status==='Open' ? 'selected' : '' %>>Open</option>
                   <option value="In Progress" <%=bug.status==='In Progress' ? 'selected' : '' %>>In Progress</option>
@@ -80,11 +83,9 @@
                 <button type="submit" class="btn">Update</button>
               </form>
               <% } %>
-              </div>
       </div>
     </div>
     <% } else { %>
       <p>Bug not found.</p>
       <% } %>
-
         <%- include('partials/footer') %>
