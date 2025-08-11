@@ -1,0 +1,90 @@
+<%- include('partials/header') %>
+
+  <% if (bug) { %>
+    <div class="card">
+      <div class="card-header">
+        <h2>
+          <%= bug.bugName %>
+        </h2>
+        <span class="status-badge status-<%= bug.status.toLowerCase().replace(' ', '-') %>">
+          <%= bug.status %>
+        </span>
+      </div>
+      <div class="card-body">
+        <div class="bug-details-list">
+          <div class="detail-item">
+            <span class="detail-label">Bug ID</span>
+            <span class="detail-value">
+              <%= bug.id %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Severity</span>
+            <span class="detail-value severity-<%= bug.severity.toLowerCase() %>">
+              <%= bug.severity %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Priority</span>
+            <span class="detail-value priority-<%= bug.priority.toLowerCase() %>">
+              <%= bug.priority %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Created By</span>
+            <span class="detail-value">
+              <%= bug.createdBy %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Assigned To</span>
+            <span class="detail-value">
+              <%= bug.assignedTo %>
+            </span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Creation Date</span>
+            <span class="detail-value">
+              <%= new Date(bug.creationDate).toLocaleString() %>
+            </span>
+          </div>
+        </div>
+
+        <div class="bug-description-section">
+          <h3>Description</h3>
+          <div class="description-content">
+            <p><%- bug.description.replace(/\n/g, '<br>' ) %></p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="action-buttons">
+        <% if (currentUserId===bug.createdById) { %>
+          <a href="/bugs/<%= bug.id %>/edit" class="btn btn-secondary">Edit Bug</a>
+          <form action="/bugs/<%= bug.id %>/delete" method="POST" style="display:inline;"
+            onsubmit="return confirm('Are you sure you want to delete this bug?');">
+            <button type="submit" class="btn btn-danger">Delete Bug</button>
+          </form>
+          <% } %>
+          </div>
+<div class="update-status">
+            <% if (currentUserId===bug.assignedToId) { %>
+              <form action="/bugs/<%= bug.id %>/status" method="POST" class="update-status-form">
+                <span>Update Status:</span>
+                <select name="status">
+                  <option value="Open" <%=bug.status==='Open' ? 'selected' : '' %>>Open</option>
+                  <option value="In Progress" <%=bug.status==='In Progress' ? 'selected' : '' %>>In Progress</option>
+                  <option value="Resolved" <%=bug.status==='Resolved' ? 'selected' : '' %>>Resolved</option>
+                  <option value="Closed" <%=bug.status==='Closed' ? 'selected' : '' %>>Closed</option>
+                </select>
+                <button type="submit" class="btn">Update</button>
+              </form>
+              <% } %>
+              </div>
+      </div>
+    </div>
+    <% } else { %>
+      <p>Bug not found.</p>
+      <% } %>
+
+        <%- include('partials/footer') %>

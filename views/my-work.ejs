@@ -1,0 +1,95 @@
+<%- include('partials/header') %>
+
+ <h1>My Work</h1>
+ <p>All bugs assigned to you or reported by you.</p>
+
+ <div class="my-work-section">
+  <h2>Bugs Assigned To Me</h2>
+  <% if (assignedBugs.length> 0) { %>
+   <table class="bug-table">
+    <thead>
+     <tr>
+      <th>ID</th>
+      <th>Bug Name</th>
+      <th>Created By</th>
+      <th>Severity</th>
+      <th>Priority</th>
+      <th>Status</th>
+     </tr>
+    </thead>
+    <tbody>
+     <% assignedBugs.forEach(bug=> { %>
+      <tr onclick="window.location.href='/bugs/<%= bug.id %>'">
+       <td>
+        <%= bug.id %>
+       </td>
+       <td>
+        <%= bug.bugName %>
+       </td>
+       <td>
+        <%= bug.createdBy %>
+       </td>
+       <td>
+        <%= bug.severity %>
+       </td>
+       <td>
+        <%= bug.priority %>
+       </td>
+       <td><span class="status-badge status-<%= bug.status.toLowerCase().replace(' ', '-') %>">
+         <%= bug.status %>
+        </span></td>
+      </tr>
+      <% }) %>
+    </tbody>
+   </table>
+   <% } else { %>
+    <p>You have no bugs assigned to you.</p>
+    <% } %>
+ </div>
+
+ <div class="my-work-section">
+  <h2>Bugs I Reported</h2>
+  <% if (createdBugs.length> 0) { %>
+   <table class="bug-table">
+    <thead>
+     <tr>
+      <th>ID</th>
+      <th>Bug Name</th>
+      <th>Assigned To</th>
+      <th>Severity</th>
+      <th>Priority</th>
+      <th>Status</th>
+     </tr>
+    </thead>
+    <tbody>
+     <% createdBugs.forEach(bug=> { %>
+      <tr onclick="window.location.href='/bugs/<%= bug.id %>'">
+       <td>
+        <%= bug.id %>
+       </td>
+       <td>
+        <%= bug.bugName %>
+       </td>
+       <td>
+        <%= bug.assignedTo %>
+       </td>
+       <td>
+        <%= bug.severity %>
+       </td>
+       <td>
+        <%= bug.priority %>
+       </td>
+       <td><span class="status-badge status-<%= bug.status.toLowerCase().replace(' ', '-') %>">
+         <%= bug.status %>
+        </span></td>
+      </tr>
+      <% }) %>
+    </tbody>
+   </table>
+   <% } else { %>
+    <p>You have not reported any bugs.</p>
+    <% } %>
+ </div>
+
+
+ <%- include('partials/footer') %>
