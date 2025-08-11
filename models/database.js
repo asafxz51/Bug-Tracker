@@ -1,4 +1,3 @@
-// REPLACE a/bug-tracker/models/database.js WITH THIS:
 
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcryptjs');
@@ -20,7 +19,6 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                 CONSTRAINT username_unique UNIQUE (username)
             )`);
 
-            // UPDATED BUGS TABLE
             db.run(`CREATE TABLE IF NOT EXISTS bugs (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 bugName TEXT,
@@ -36,7 +34,6 @@ const db = new sqlite3.Database(DBSOURCE, (err) => {
                 FOREIGN KEY (assignedTo) REFERENCES users (id) ON DELETE CASCADE
             )`);
 
-            // NEW STEPS TABLE
             db.run(`CREATE TABLE IF NOT EXISTS steps (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 bug_id INTEGER NOT NULL,

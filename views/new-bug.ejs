@@ -1,4 +1,3 @@
-<!-- REPLACE a/bug-tracker/views/new-bug.ejs WITH THIS: -->
 
 <%- include('partials/header') %>
 
@@ -14,18 +13,15 @@
       <textarea id="description" name="description" rows="5" required></textarea>
     </div>
 
-    <!-- ***NEW***: Steps section for creating a bug -->
     <div class="form-group">
       <label>Steps to Reproduce</label>
       <div class="steps-section" id="new-bug-steps-section">
         <ol id="new-steps-list">
-          <!-- Steps will be dynamically inserted here by JavaScript -->
         </ol>
         <div class="add-step-form">
           <input type="text" id="new-step-description" placeholder="Enter a new step">
           <button type="button" id="add-step-btn" class="btn">Add Step</button>
         </div>
-        <!-- This hidden input will hold the steps data for submission -->
         <input type="hidden" name="steps" id="steps-data-input">
       </div>
     </div>

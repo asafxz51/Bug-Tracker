@@ -1,4 +1,3 @@
-<!-- REPLACE a/bug-tracker/views/bug-detail.ejs WITH THIS: -->
 
 <%- include('partials/header') %>
 
@@ -46,13 +45,17 @@
 
         <div class="steps-section">
           <h3>Steps to Reproduce</h3>
-          <ol id="steps-list" data-bug-id="<%= bug.id %>"></ol>
-          <% if (currentUserId===bug.createdById) { %>
-            <div class="add-step-form">
-              <input type="text" id="new-step-description" placeholder="Enter a new step to reproduce">
-              <button id="add-step-btn" class="btn">Add Step</button>
-            </div>
-            <% } %>
+          <ol class="read-only-steps">
+            <% if (steps && steps.length> 0) { %>
+              <% steps.forEach(step=> { %>
+                <li>
+                  <%= step.description %>
+                </li>
+                <% }) %>
+                  <% } else { %>
+                    <li class="no-steps">No steps were provided.</li>
+                    <% } %>
+          </ol>
         </div>
 
         <div class="bug-description-section">
@@ -66,14 +69,13 @@
         <% if (currentUserId===bug.createdById) { %>
           <a href="/bugs/<%= bug.id %>/edit" class="btn btn-secondary">Edit Bug</a>
           <form action="/bugs/<%= bug.id %>/delete" method="POST" style="display:inline;"
-            onsubmit="return confirm('Are you sure you want to delete this bug?');">
+            onsubmit="return confirm('Are you sure?');">
             <button type="submit" class="btn btn-danger">Delete Bug</button>
           </form>
           <% } %>
             <% if (currentUserId===bug.assignedToId || currentUserId===bug.createdById) { %>
               <form action="/bugs/<%= bug.id %>/status" method="POST" class="update-status-form">
                 <span>Update Status:</span>
-                <!-- ***FIXED***: Added logic to dynamically select the current status -->
                 <select name="status">
                   <option value="Open" <%=bug.status==='Open' ? 'selected' : '' %>>Open</option>
                   <option value="In Progress" <%=bug.status==='In Progress' ? 'selected' : '' %>>In Progress</option>
@@ -88,4 +90,5 @@
     <% } else { %>
       <p>Bug not found.</p>
       <% } %>
+
         <%- include('partials/footer') %>

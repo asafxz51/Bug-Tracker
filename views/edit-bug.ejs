@@ -1,49 +1,76 @@
+
 <%- include('partials/header') %>
 
- <h2>Edit Bug</h2>
+  <h2>Edit Bug</h2>
 
- <% if (bug) { %>
-  <form action="/bugs/<%= bug.id %>/edit" method="POST">
-   <div class="form-group">
-    <label for="bugName">Bug Name</label>
-    <input type="text" id="bugName" name="bugName" value="<%= bug.bugName %>" required>
-   </div>
-   <div class="form-group">
-    <label for="description">Description</label>
-    <textarea id="description" name="description" rows="5" required><%= bug.description %></textarea>
-   </div>
-   <div class="form-group">
-    <label for="assignedTo">Assigned To</label>
-    <select id="assignedTo" name="assignedTo" required>
-     <% users.forEach(user=> { %>
-      <option value="<%= user.id %>" <%=bug.assignedTo==user.id ? 'selected' : '' %>>
-       <%= user.username %>
-      </option>
-      <% }) %>
-    </select>
-   </div>
-   <div class="form-group">
-    <label for="severity">Severity</label>
-    <select id="severity" name="severity" required>
-     <option value="Trivial" <%=bug.severity==='Trivial' ? 'selected' : '' %>>Trivial</option>
-     <option value="Minor" <%=bug.severity==='Minor' ? 'selected' : '' %>>Minor</option>
-     <option value="Medium" <%=bug.severity==='Medium' ? 'selected' : '' %>>Medium</option>
-     <option value="Major" <%=bug.severity==='Major' ? 'selected' : '' %>>Major</option>
-     <option value="Critical" <%=bug.severity==='Critical' ? 'selected' : '' %>>Critical</option>
-    </select>
-   </div>
-   <div class="form-group">
-    <label for="priority">Priority</label>
-    <select id="priority" name="priority" required>
-     <option value="Low" <%=bug.priority==='Low' ? 'selected' : '' %>>Low</option>
-     <option value="Medium" <%=bug.priority==='Medium' ? 'selected' : '' %>>Medium</option>
-     <option value="High" <%=bug.priority==='High' ? 'selected' : '' %>>High</option>
-    </select>
-   </div>
-   <button type="submit" class="btn">Update Bug</button>
-  </form>
-  <% } else { %>
-   <p>Bug not found or you do not have permission to edit it.</p>
-   <% } %>
+  <% if (bug) { %>
+    <form action="/bugs/<%= bug.id %>/edit" method="POST" id="edit-bug-form">
+      <div class="form-group">
+        <label for="bugName">Bug Name</label>
+        <input type="text" id="bugName" name="bugName" value="<%= bug.bugName %>" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="5" required><%= bug.description %></textarea>
+      </div>
 
-    <%- include('partials/footer') %>
+      <div class="form-group">
+        <label>Steps to Reproduce</label>
+        <div class="steps-section" id="edit-bug-steps-section">
+          <ol id="steps-list">
+            <% if (steps && steps.length> 0) { %>
+              <% steps.forEach(step=> { %>
+                <li>
+                  <span class="step-description">
+                    <%= step.description %>
+                  </span>
+                  <div class="step-actions">
+                    <button type="button" class="btn btn-secondary btn-sm edit-step-btn">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm delete-step-btn">Delete</button>
+                  </div>
+                </li>
+                <% }) %>
+                  <% } %>
+          </ol>
+          <div class="add-step-form">
+            <input type="text" id="new-step-description" placeholder="Enter a new step">
+            <button type="button" id="add-step-btn" class="btn">Add Step</button>
+          </div>
+          <input type="hidden" name="steps" id="steps-data-input">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="assignedTo">Assigned To</label>
+        <select id="assignedTo" name="assignedTo" required>
+          <% users.forEach(user=> { %>
+            <option value="<%= user.id %>" <%=bug.assignedTo==user.id ? 'selected' : '' %>><%= user.username %>
+            </option>
+            <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="severity">Severity</label>
+        <select id="severity" name="severity" required>
+          <option value="Trivial" <%=bug.severity==='Trivial' ? 'selected' : '' %>>Trivial</option>
+          <option value="Minor" <%=bug.severity==='Minor' ? 'selected' : '' %>>Minor</option>
+          <option value="Medium" <%=bug.severity==='Medium' ? 'selected' : '' %>>Medium</option>
+          <option value="Major" <%=bug.severity==='Major' ? 'selected' : '' %>>Major</option>
+          <option value="Critical" <%=bug.severity==='Critical' ? 'selected' : '' %>>Critical</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" name="priority" required>
+          <option value="Low" <%=bug.priority==='Low' ? 'selected' : '' %>>Low</option>
+          <option value="Medium" <%=bug.priority==='Medium' ? 'selected' : '' %>>Medium</option>
+          <option value="High" <%=bug.priority==='High' ? 'selected' : '' %>>High</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Update Bug</button>
+    </form>
+    <% } else { %>
+      <p>Bug not found or you do not have permission to edit it.</p>
+      <% } %>
+
+        <%- include('partials/footer') %>

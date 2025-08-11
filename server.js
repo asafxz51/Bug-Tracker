@@ -1,4 +1,3 @@
-// REPLACE a/bug-tracker/server.js WITH THIS:
 
 const express = require('express');
 const app = express();
@@ -9,7 +8,7 @@ const session = require('express-session');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json()); // <-- ADDED FOR API
+app.use(express.json()); 
 app.use(session({
  secret: 'your_secret_key',
  resave: false,
@@ -17,7 +16,6 @@ app.use(session({
  cookie: { name: 'sid' }
 }));
 
-// Middleware to check if user is logged in
 const checkAuth = (req, res, next) => {
  if (!req.session.userId) {
   res.redirect('/login');
@@ -31,11 +29,11 @@ const checkAuth = (req, res, next) => {
 // Routes
 const authRoutes = require('./routes/auth');
 const bugRoutes = require('./routes/bugs');
-const apiRoutes = require('./routes/api'); // <-- ADDED FOR API
+const apiRoutes = require('./routes/api'); 
 
 app.use(authRoutes);
 app.use(bugRoutes);
-app.use('/api', apiRoutes); // <-- ADDED FOR API
+app.use('/api', apiRoutes); 
 
 
 app.get('/', (req, res) => {

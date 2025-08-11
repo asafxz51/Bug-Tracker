@@ -1,10 +1,8 @@
-<!-- In views/register.ejs -->
 <%- include('partials/header') %>
 
  <div class="form-container">
   <h2>Register</h2>
 
-  <%# This is the new block to add %>
    <% if (typeof error !=='undefined' && error) { %>
     <div class="error-message">
      <%= error %>
